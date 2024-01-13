@@ -3,6 +3,7 @@ var router = express.Router();
 var {
   regStudentService,
   getStudentService,
+  loginStudentService,
 } = require("../services/stdService");
 // http://localhost:2020/std/reg-std,post(this is the url)
 
@@ -38,4 +39,16 @@ router.get("/get-std", async function (req, res) {
   console.log("get-std final response");
 });
 
+router.post("/login", async function (req, res) {
+  try {
+    console.log("login controller");
+    const { data } = req.body;
+    const result = await loginStudentService(data);
+    console.log("result given back to controller from service ");
+    res.send(result);
+  } catch (err) {
+    console.error(err);
+    res.send(err.message);
+  }
+});
 module.exports = router;

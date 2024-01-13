@@ -19,8 +19,17 @@ async function getStudentDAO() {
   });
   return result;
 }
-
+async function postStudentDAO(data) {
+  console.log("postStudentDAO");
+  const { uid, pwd } = data;
+  var db = await getDBCon();
+  var collection = db.collection("Student");
+  const result = await collection.find({ uid, pwd }).toArray();
+  console.log("dao given back to service from poststudent dao");
+  return result;
+}
 module.exports = {
   regStudentDAO,
   getStudentDAO,
+  postStudentDAO,
 };
