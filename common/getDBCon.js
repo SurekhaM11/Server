@@ -1,6 +1,6 @@
 var mongo = require("mongodb");
 async function getDBCon() {
-  var url = "mongodb+srv://mandavallisurekha:s1@s.t4xgrti.mongodb.net/";
+  var url = process.env.DB_CONN_URL;
   // MongoDB server- Database - collection - document
   var mongoClient = mongo.MongoClient;
   var server = await mongoClient.connect(url);
