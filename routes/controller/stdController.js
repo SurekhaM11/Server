@@ -5,6 +5,8 @@ var {
   getStudentService,
   loginStudentService,
 } = require("../services/stdService");
+
+var validateToken = require("../../common/validateToken");
 // http://localhost:2020/std/reg-std,post(this is the url)
 
 router.post("/reg-std", async function (req, res) {
@@ -27,7 +29,7 @@ router.post("/reg-std", async function (req, res) {
 });
 
 // http://localhost:2020/std/get-std,get(this is the url)
-router.get("/get-std", async function (req, res) {
+router.get("/get-std", validateToken, async function (req, res, next) {
   //take the data from req
   //connect with DB
   //perform required operation

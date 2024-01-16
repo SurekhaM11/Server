@@ -3,6 +3,7 @@ const {
   regStudentDAO,
   postStudentDAO,
 } = require("../dao/stdDAO");
+var jsonwebtoken = require("jsonwebtoken");
 async function regStudentService(data) {
   console.log("regStudent service ");
   var result = await regStudentDAO(data);
@@ -18,6 +19,12 @@ async function getStudentService() {
 async function loginStudentService(data) {
   console.log("loginStudentService");
   var result = await postStudentDAO(data);
+  if (result.length) {
+    var token = jsonwebtoken.sign(data, "app-token");
+    console.log("token", token);
+    result[0].token = token;
+    delete result[0].pwd;
+  }
   console.log("result received from dao and send to controller");
   return result;
 }
