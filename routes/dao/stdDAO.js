@@ -11,7 +11,7 @@ async function regStudentDAO(data) {
 async function getStudentDAO() {
   console.log("getStudentDAO");
   var db = await getDBCon();
-  var collection = db.collection("students");
+  var collection = db.collection("Student");
   const result = await collection.find().toArray();
   result.map((obj) => {
     delete obj.pwd;
