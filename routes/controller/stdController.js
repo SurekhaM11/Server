@@ -4,6 +4,8 @@ var {
   regStudentService,
   getStudentService,
   loginStudentService,
+  putStudentService,
+  deleteStudentService,
 } = require("../services/stdService");
 
 var validateToken = require("../../common/validateToken");
@@ -40,7 +42,7 @@ router.get("/get-std", validateToken, async function (req, res, next) {
   res.send(result);
   console.log("get-std final response");
 });
-
+// http://localhost:2020/std/login,post
 router.post("/login", async function (req, res) {
   try {
     console.log("login controller");
@@ -51,6 +53,30 @@ router.post("/login", async function (req, res) {
   } catch (err) {
     console.error(err);
     res.send(err.message);
+  }
+});
+//http://localhost:2020/std/update, put req
+router.put("/update", validateToken, async function (req, res) {
+  try {
+    console.log("update controller");
+    const { data } = req.body;
+    const { id } = req.query;
+    var result = await putStudentService(id, data);
+    res.send(result);
+  } catch (err) {
+    console.error("errror from Put", err);
+  }
+});
+//http://localhost:2020/std/delete-req, delete req
+router.delete("/delete-std/:id", validateToken, async function (req, res) {
+  try {
+    console.log("delete controller");
+    const { id } = req.params;
+    var result = await deleteStudentService(id);
+    console.log("deleted successfully");
+    res.send(result);
+  } catch (err) {
+    console.error("error from delete req", err);
   }
 });
 module.exports = router;

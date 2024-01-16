@@ -14,7 +14,7 @@ dotenv.config();
  */
 
 var port = normalizePort(process.env.PORT);
-console.log("port", port);
+//console.log("port", port);
 app.set("port", port);
 
 /**
