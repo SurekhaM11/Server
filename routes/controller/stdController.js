@@ -6,6 +6,8 @@ var {
   loginStudentService,
   putStudentService,
   deleteStudentService,
+  //getStudentServiceById,
+  getStdByIdService,
 } = require("../services/stdService");
 
 var validateToken = require("../../common/validateToken");
@@ -77,6 +79,30 @@ router.delete("/delete-std/:id", validateToken, async function (req, res) {
     res.send(result);
   } catch (err) {
     console.error("error from delete req", err);
+  }
+});
+
+// router.get("get-std-by-id", async function (req, res) {
+//   try {
+//     console.log("get-std-by-id controller");
+//     var { id } = req.query;
+//     var result = await getStudentServiceById(id);
+//     console.log("result returned from service ");
+//     res.send(result);
+//   } catch (err) {
+//     console.error("error from get-std-by-id", err);
+//   }
+// });
+router.get("/get-std-by-id", validateToken, async function (req, res, next) {
+  try {
+    console.log("get-std-by-id controller");
+    var { id } = req.query;
+    const result = await getStdByIdService(id);
+    console.log("result returned from service ");
+    res.send(result);
+  } catch (ex) {
+    console.error("get-std-by-id", ex);
+    res.send(ex.message);
   }
 });
 module.exports = router;

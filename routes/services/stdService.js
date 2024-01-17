@@ -4,6 +4,8 @@ const {
   postStudentDAO,
   putStudentDAO,
   deleteStudentDAO,
+  // getStudentDAOById,
+  getStdByIdDAO,
 } = require("../dao/stdDAO");
 var jsonwebtoken = require("jsonwebtoken");
 async function regStudentService(data) {
@@ -42,12 +44,27 @@ async function deleteStudentService(id) {
   console.log("result given back to controller from service");
   return result;
 }
+// async function getStudentServiceById(id) {
+//   console.log("getStudentServiceById");
+//   var result = await getStudentDAOById(id);
+//   console.log("received result from dao and ");
+//   return result;
+// }
+async function getStdByIdService(id) {
+  console.log("getStudentServiceById");
+  var result = await getStdByIdDAO(id);
+  console.log("received result from dao and ");
+  return result;
+}
+
 module.exports = {
   regStudentService,
   getStudentService,
   loginStudentService,
   putStudentService,
   deleteStudentService,
+  // getStudentServiceById,
+  getStdByIdService,
 };
 //any service operations we can do here.
 //for example, password encrypt and save, image convertion to base64

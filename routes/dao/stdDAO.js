@@ -1,4 +1,4 @@
-const { ObjectId } = require("mongodb");
+var ObjectId = require("mongodb").ObjectId;
 var getDBCon = require("../../common/getDBCon");
 async function regStudentDAO(data) {
   console.log("regStudentDAO");
@@ -41,23 +41,37 @@ async function putStudentDAO(id, data) {
   return result;
 }
 async function deleteStudentDAO(id) {
-  // console.log("deleteStudentDAO");
-  // var db = await getDBCon();
-  // var collection = db.collection("Student");
-  // var result = await collection.deleteOne({ _id: new ObjectId(id) });
-  // console.log("deleted successfully from db ");
-  // res.setHeader("Content-Type", "application/json");
-  // res.json(result);
-  // return result;
+  console.log("deleteStudentDAO");
   var db = await getDBCon();
   var collection = db.collection("Student");
   var result = await collection.deleteOne({ _id: new ObjectId(id) });
+  console.log("deleted successfully from db ");
+  res.setHeader("Content-Type", "application/json");
+  res.json(result);
   return result;
 }
+
+// async function getStudentDAOById(id) {
+//   var db = await getDBCon();
+//   var collection = db.collection("Student");
+//   var result = await collection.findOne({ _id: new ObjectId(id) });
+//   return result;
+// }
+async function getStdByIdDAO(id) {
+  console.log("getStdByIdDAO");
+  var db = await getDBCon();
+  var collection = db.collection("Student");
+  var result = await collection.findOne({ _id: new ObjectId(id) });
+  console.log("received result from dao and ");
+  return result;
+}
+
 module.exports = {
   regStudentDAO,
   getStudentDAO,
   postStudentDAO,
   putStudentDAO,
   deleteStudentDAO,
+  //getStudentDAOById,
+  getStdByIdDAO,
 };
